@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mennatullah Ibraheem, software engineer in Cairo working across frontend, AI and product. Case studies, blog, experience and talks.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mennatullah Ibraheem">
+<meta property="og:description" content="Mennatullah Ibraheem, software engineer in Cairo working across frontend, AI and product. Case studies, blog, experience and talks.">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Mennatullah Ibraheem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one person, three sides. Thesis + at-a-glance up top, a three-way identity band, work tagged by side, then the blog.
+   Plain light palette: white ground, near-black text; blue = frontend (--accent), green = AI (--olive token), orange = product (--mustard token). */
+:root {
+  --bg: #ffffff;
+  --surface: #fafafa;
+  --fg: #1f2328;
+  --muted: #59636e;
+  --line: #e5e7eb;
+  --accent: #1f6feb;
+  --accent-soft: #eaf2ff;
+  --olive: #1a7f37;
+  --olive-soft: #e8f5ec;
+  --mustard: #bc4c00;
+  --mustard-soft: #fff1e5;
+  --sev-critical: #cf222e;
+  --sev-high: #d4701c;
+  --sev-medium: #bf8700;
+  --sev-low: #8c959f;
+  --code-bg: #f3f4f6;
+  --font-display: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: clamp(2rem, 4.5vw, 3.4rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115; --surface: #161a20; --fg: #e6e8eb; --muted: #9aa4af; --line: #2a2f37;
+    --accent: #58a6ff; --accent-soft: #132339; --olive: #3fb950; --olive-soft: #12261a;
+    --mustard: #f0883e; --mustard-soft: #2b1d10; --code-bg: #1c2128;
+    --sev-critical: #f85149; --sev-high: #f0883e; --sev-medium: #d29922; --sev-low: #8b949e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1115; --surface: #161a20; --fg: #e6e8eb; --muted: #9aa4af; --line: #2a2f37;
+  --accent: #58a6ff; --accent-soft: #132339; --olive: #3fb950; --olive-soft: #12261a;
+  --mustard: #f0883e; --mustard-soft: #2b1d10; --code-bg: #1c2128;
+  --sev-critical: #f85149; --sev-high: #f0883e; --sev-medium: #d29922; --sev-low: #8b949e;
+  color-scheme: dark;
+}
+.side-fe { --side: var(--accent); --side-soft: var(--accent-soft); }
+.side-ai { --side: var(--olive); --side-soft: var(--olive-soft); }
+.side-pm { --side: var(--mustard); --side-soft: var(--mustard-soft); }
+.side-tag {
+  display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 0.74rem;
+  padding: 3px 10px; border-radius: 999px; background: var(--side-soft); color: var(--fg);
+}
+.side-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--side); }
+
+/* Three sides */
+.sides { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.side { padding: 26px 24px; display: grid; gap: 14px; align-content: start; border-top: 3px solid var(--side); min-width: 0; }
+.side + .side { border-left: 1px solid var(--line); }
+.side h3 { font-size: 1.35rem; font-weight: 700; }
+.side .tagline { font-family: var(--font-display); font-size: 1.05rem; color: var(--side); font-weight: 600; }
+.side p { color: var(--muted); font-size: 0.95rem; }
+.side ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 0.92rem; }
+.side li { display: grid; grid-template-columns: 14px 1fr; gap: 8px; }
+.side li::before { content: ""; width: 6px; height: 6px; margin-top: 0.6em; border-radius: 50%; background: var(--side); }
+.side .proof-line { font-family: var(--font-body); font-size: 0.76rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 12px; }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+p { margin: 0; }
+.label {
+  font-family: var(--font-body); font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+code, .mono { font-family: var(--font-mono); font-size: 0.88em; }
+
+/* Header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--fg); text-decoration: none; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { color: var(--muted); text-decoration: none; font-size: 0.92rem; }
+nav a:hover { color: var(--fg); }
+
+/* Buttons and chips */
+.btn {
+  font: 500 0.95rem var(--font-body); padding: 10px 18px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--fg); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn.small { padding: 6px 12px; font-size: 0.86rem; }
+.btn.danger { color: var(--sev-critical); }
+.btn:hover { border-color: var(--accent); }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.stack { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-family: var(--font-body); font-size: 0.78rem; padding: 4px 10px; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--muted); background: var(--surface);
+}
+
+/* Hero */
+.hero .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; padding-block: 64px 56px; align-items: start; }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.hero h1 { font-size: var(--step-3); font-weight: 700; letter-spacing: -0.01em; }
+.hero h1 em { font-style: normal; color: var(--side); }
+.hero .lede { font-size: 1.12rem; color: var(--muted); max-width: 58ch; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.glance { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); min-width: 0; }
+.glance-head { padding: 14px 20px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; }
+.glance dl { margin: 0; display: grid; }
+.glance .row { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.glance .row:last-child { border-bottom: none; }
+.glance dt { font-family: var(--font-body); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.glance dd { margin: 0; min-width: 0; }
+.glance dd ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.glance .latest-title { font-weight: 600; }
+.glance .latest-meta { display: block; font-size: 0.85rem; color: var(--muted); }
+
+/* Sections */
+section.block { padding-block: 56px; border-top: 1px solid var(--line); }
+.section-head { display: grid; gap: 10px; margin-bottom: 32px; max-width: 65ch; }
+.section-head h2 { font-size: var(--step-2); font-weight: 700; }
+.section-head p { color: var(--muted); }
+.section-head.split { max-width: none; grid-template-columns: 1fr auto; align-items: end; }
+.section-head.split > div { display: grid; gap: 10px; max-width: 65ch; }
+
+/* Case studies */
+.case { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding-block: 28px; }
+.case + .case { border-top: 1px dashed var(--line); }
+.case-meta { display: grid; gap: 10px; align-content: start; }
+.case-meta h3 { font-size: var(--step-1); font-weight: 700; }
+.case-body { display: grid; gap: 18px; min-width: 0; }
+.case-body > p { max-width: 65ch; }
+.component-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.component { border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: var(--surface); display: grid; gap: 4px; align-content: start; }
+.component code { color: var(--fg); font-weight: 500; }
+.component span { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+
+.sevbar { display: flex; height: 14px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.sevbar div { height: 100%; }
+.sevlegend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.88rem; }
+.sevlegend span { display: inline-flex; gap: 6px; align-items: center; font-variant-numeric: tabular-nums; }
+.sevlegend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.findings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.finding { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: var(--surface); display: grid; gap: 6px; align-content: start; }
+.finding .sev { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.finding p { font-size: 0.92rem; color: var(--muted); }
+.finding strong { font-weight: 600; color: var(--fg); }
+
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); counter-reset: step; list-style: none; padding: 0; margin: 0; }
+.flow li { padding: 12px 14px 12px 0; border-top: 2px solid var(--side, var(--accent)); display: grid; gap: 4px; align-content: start; }
+.flow li::before { counter-increment: step; content: "0" counter(step); font-family: var(--font-body); font-size: 0.75rem; color: var(--side, var(--accent)); }
+.flow li strong { font-family: var(--font-display); font-weight: 700; }
+.flow li span { font-size: 0.86rem; color: var(--muted); }
+
+/* Principles */
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
+.principle { display: grid; gap: 8px; align-content: start; }
+.principle h3 { font-size: 1.1rem; font-weight: 700; }
+.principle p { color: var(--muted); font-size: 0.95rem; }
+.principle .proof { font-family: var(--font-body); font-size: 0.76rem; color: var(--accent); }
+
+/* Blog index */
+.post-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.post-item { border-top: 1px solid var(--line); }
+.post-item:last-child { border-bottom: 1px solid var(--line); }
+.post-link { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 22px 0; color: inherit; text-decoration: none; }
+.post-link:hover h3 { color: var(--accent); }
+.post-link .when { font-family: var(--font-body); font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 3px; }
+.post-link .text { display: grid; gap: 8px; min-width: 0; }
+.post-link h3 { font-size: 1.25rem; font-weight: 700; transition: color 0.15s; }
+.post-link p { color: var(--muted); max-width: 65ch; }
+.empty-blog { border: 1px dashed var(--line); border-radius: 12px; padding: 28px; display: grid; gap: 10px; max-width: 640px; }
+.empty-blog h3 { font-size: 1.15rem; }
+.empty-blog p { color: var(--muted); }
+
+/* Article view */
+.article .wrap { padding-block: 48px 72px; }
+.article-inner { max-width: 720px; margin: 0 auto; display: grid; gap: 22px; }
+.back { color: var(--muted); text-decoration: none; font-size: 0.92rem; }
+.back:hover { color: var(--fg); }
+.article h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.01em; }
+.article .summary { font-size: 1.15rem; color: var(--muted); }
+.article-tools { display: flex; gap: 10px; flex-wrap: wrap; }
+.prose { display: grid; gap: 18px; font-size: 1.05rem; line-height: 1.75; min-width: 0; }
+.prose h2 { font-size: 1.5rem; font-weight: 700; margin-top: 14px; }
+.prose h3 { font-size: 1.2rem; font-weight: 700; margin-top: 8px; }
+.prose ul, .prose ol { margin: 0; padding-inline-start: 1.4em; display: grid; gap: 6px; }
+.prose code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+.prose pre { margin: 0; background: var(--code-bg); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.88rem; line-height: 1.55; }
+.prose pre code { background: none; padding: 0; }
+.prose blockquote { margin: 0; padding-inline-start: 16px; border-inline-start: 3px solid var(--accent); color: var(--muted); }
+.prose [dir="rtl"] { text-align: right; }
+
+/* Timeline */
+.timeline { display: grid; }
+.role { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.role .when { font-family: var(--font-body); font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.role h3 { font-size: 1.08rem; font-weight: 700; }
+.role .where { color: var(--muted); font-size: 0.9rem; }
+.role p { margin-top: 6px; max-width: 65ch; font-size: 0.95rem; }
+
+.talks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.talk { border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: var(--surface); display: grid; gap: 6px; align-content: start; }
+.talk h3 { font-size: 1.02rem; font-weight: 700; }
+.talk p { color: var(--muted); font-size: 0.9rem; }
+
+/* Contact */
+.contact .wrap { padding-block: 64px 80px; display: grid; gap: 22px; }
+.contact h2 { font-size: var(--step-3); font-weight: 700; letter-spacing: -0.01em; max-width: 22ch; }
+.contact-rows { display: grid; gap: 10px; }
+.contact-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.contact-row .label { width: 80px; }
+.contact-row .val { font-family: var(--font-body); font-size: 0.95rem; user-select: all; overflow-wrap: anywhere; }
+.status { font-size: 0.88rem; color: var(--muted); min-height: 1.3em; }
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 20px; color: var(--muted); font-size: 0.85rem; }
+
+/* Editor */
+dialog.editor {
+  width: min(880px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0;
+  border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--fg);
+}
+dialog.editor::backdrop { background: rgba(10, 12, 20, 0.5); }
+.editor form { display: grid; gap: 16px; padding: 22px; }
+.editor-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.editor-head h2 { font-size: 1.3rem; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-size: 0.86rem; font-weight: 500; }
+.field .hint { font-size: 0.8rem; color: var(--muted); }
+.field input, .field textarea {
+  font: 400 0.95rem var(--font-body); color: var(--fg); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%;
+}
+.field textarea { resize: vertical; line-height: 1.55; }
+#f-body { font-family: var(--font-mono); font-size: 0.88rem; min-height: 320px; }
+.field-row { display: grid; grid-template-columns: 180px 1fr; gap: 12px; }
+.tabs { display: flex; gap: 4px; }
+.tabs button { font: 500 0.82rem var(--font-body); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-pressed="true"] { background: var(--accent-soft); color: var(--fg); border-color: var(--accent); }
+.preview-pane { border: 1px solid var(--line); border-radius: 8px; padding: 18px; min-height: 320px; max-height: 50vh; overflow: auto; background: var(--bg); }
+.editor-actions { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+.editor-actions .right { display: flex; gap: 10px; flex-wrap: wrap; }
+
+@media (max-width: 880px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 40px; }
+  .case { grid-template-columns: 1fr; gap: 16px; }
+  .sides { grid-template-columns: 1fr; }
+  .side + .side { border-left: none; }
+  .principles { grid-template-columns: 1fr 1fr; }
+  .flow { grid-template-columns: 1fr; }
+  .flow li { border-top: none; border-left: 2px solid var(--side, var(--accent)); padding: 8px 0 8px 14px; }
+}
+@media (max-width: 600px) {
+  .principles, .findings, .talks { grid-template-columns: 1fr; }
+  .role, .post-link { grid-template-columns: 1fr; gap: 4px; }
+  .section-head.split, .field-row { grid-template-columns: 1fr; }
+  .glance .row { grid-template-columns: 1fr; gap: 4px; }
+  nav { gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Mennatullah Ibraheem</a>
+    <nav aria-label="Sections">
+      <a href="#sides">What I do</a>
+      <a href="#work">Work</a>
+      <a href="#blog">Blog</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+ <div id="home-view">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="label">Software Engineer · Frontend · AI · Product · Cairo</p>
+        <h1>I build <em class="side-fe">the interface</em>, <em class="side-ai">the AI behind it</em>, and <em class="side-pm">the reason a customer needs it</em>.</h1>
+        <p class="lede">7+ years shipping web products with React and Next.js. Today I build core features of a multi-customer SaaS platform, work with AI agents to plan, build and audit code, and support presales so I know what customers actually need.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#sides">What I do</a>
+          <a class="btn" href="#blog">Read the blog</a>
+          <a class="btn" href="https://www.linkedin.com/in/mennatullah-ibraheem-468323134/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/MennaTallah2" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <aside class="glance" aria-label="At a glance">
+        <div class="glance-head"><span class="label">At a glance</span></div>
+        <dl>
+          <div class="row"><dt>Now</dt><dd>Senior Frontend Developer at ITWorx</dd></div>
+          <div class="row"><dt>Sides</dt><dd><div class="stack"><span class="side-tag side-fe">Frontend engineer</span><span class="side-tag side-ai">AI builder</span><span class="side-tag side-pm">Product-minded</span></div></dd></div>
+          <div class="row"><dt>Stack</dt><dd><div class="stack"><span class="chip">React 19</span><span class="chip">Next.js 16</span><span class="chip">TypeScript</span><span class="chip">Claude</span><span class="chip">LangChain</span><span class="chip">Umbraco</span></div></dd></div>
+          <div class="row"><dt>Languages</dt><dd>Arabic and English</dd></div>
+          <div class="row"><dt>Latest post</dt><dd id="latest-post"><span class="latest-meta">First post coming soon.</span></dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="block" id="sides">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">What I do</p>
+        <h2>One engineer, three sides</h2>
+        <p>Software work today needs people who can move between the code, the AI tools and the customer. These are the three sides I bring, and the work that backs each one.</p>
+      </div>
+      <div class="sides">
+        <div class="side side-fe">
+          <span class="side-tag side-fe">Frontend engineer</span>
+          <h3>Interfaces that hold up</h3>
+          <p class="tagline">Reusable, multilingual, resilient.</p>
+          <ul>
+            <li>Shared product features configured through a CMS, used across many organizations</li>
+            <li>English and Arabic (RTL) from the start</li>
+            <li>Loading, empty, error and expired-session states designed in</li>
+          </ul>
+          <p class="proof-line">7 shared features · 15-finding reliability audit</p>
+        </div>
+        <div class="side side-ai">
+          <span class="side-tag side-ai">AI builder</span>
+          <h3>AI in how software gets made</h3>
+          <p class="tagline">Agents, specs, and judgment.</p>
+          <ul>
+            <li>Daily agentic coding with Claude and GitHub Copilot</li>
+            <li>Spec-driven development with Spec Kit, so AI work stays reviewable</li>
+            <li>AI-assisted codebase audits; studying LangChain and agent design</li>
+          </ul>
+          <p class="proof-line">AI Hackathon 2026 · AIWorx workshop</p>
+        </div>
+        <div class="side side-pm">
+          <span class="side-tag side-pm">Product-minded</span>
+          <h3>Building what customers need</h3>
+          <p class="tagline">From a customer's ask to a product feature.</p>
+          <ul>
+            <li>Technical input and demos for presales</li>
+            <li>Turning one customer's request into a feature every customer can configure</li>
+            <li>Release testing and sign-off with QA</li>
+          </ul>
+          <p class="proof-line">Presales support · product releases 4.x and R2.8</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Selected work</p>
+        <h2>Case studies across all three sides</h2>
+        <p>Client work is under NDA, so these case studies describe the problems and my approach rather than private code or customer names.</p>
+      </div>
+
+      <article class="case">
+        <div class="case-meta">
+          <p class="label">ITWorx · 2024 – now</p>
+          <h3>Reusable features for a multi-customer digital workplace</h3>
+          <div class="stack"><span class="side-tag side-fe">Frontend</span><span class="side-tag side-pm">Product</span></div>
+          <div class="stack"><span class="chip">Next.js 16</span><span class="chip">React 19</span><span class="chip">Umbraco</span><span class="chip">i18n</span></div>
+        </div>
+        <div class="case-body">
+          <p>The product serves many organizations from one codebase. Each feature has to cover common needs without customer-specific forks, and content editors configure it in the CMS. I design each component around the props and content types editors actually need, then make sure it holds up in English and Arabic, with empty data, and when an API fails.</p>
+          <div class="component-grid">
+            <div class="component"><code>ToolsResources</code><span>Curated links and files, managed by editors</span></div>
+            <div class="component"><code>Forms</code><span>CMS-built forms with multilingual validation</span></div>
+            <div class="component"><code>MediaGallery</code><span>Images and video with responsive layouts</span></div>
+            <div class="component"><code>OrgChart</code><span>Browsable reporting structure</span></div>
+            <div class="component"><code>Bookmarks</code><span>Personal saved pages across the workplace</span></div>
+            <div class="component"><code>Badges</code><span>Badge component, configurable per customer</span></div>
+            <div class="component"><code>Tiles</code><span>Shared tile system used across page layouts</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <p class="label">ITWorx · 2026</p>
+          <h3>Frontend API and error-handling audit</h3>
+          <div class="stack"><span class="side-tag side-fe">Frontend</span><span class="side-tag side-ai">AI</span></div>
+          <div class="stack"><span class="chip">BFF</span><span class="chip">Auth0 / OIDC</span><span class="chip">Resilience</span></div>
+        </div>
+        <div class="case-body">
+          <p>I audited every API call, backend-for-frontend route and sign-in flow in the product's frontend to find where users could end up stuck, misled, or looking at stale data. I used an AI agent to sweep the codebase, then checked and prioritised what it found myself. The result was 15 findings, each with a severity, a concrete failure scenario, a fix pattern and an effort estimate.</p>
+          <div class="sevbar" role="img" aria-label="15 findings: 3 critical, 4 high, 5 medium, 3 low">
+            <div style="flex: 3; background: var(--sev-critical)"></div>
+            <div style="flex: 4; background: var(--sev-high)"></div>
+            <div style="flex: 5; background: var(--sev-medium)"></div>
+            <div style="flex: 3; background: var(--sev-low)"></div>
+          </div>
+          <div class="sevlegend">
+            <span><i style="background: var(--sev-critical)"></i>3 critical</span>
+            <span><i style="background: var(--sev-high)"></i>4 high</span>
+            <span><i style="background: var(--sev-medium)"></i>5 medium</span>
+            <span><i style="background: var(--sev-low)"></i>3 low</span>
+          </div>
+          <div class="findings">
+            <div class="finding"><span class="sev" style="color: var(--sev-critical)">Critical</span><strong>Requests with no timeout</strong><p>A slow CMS or identity provider could freeze pages for every user. Fix: one shared fetch-with-timeout utility for all server routes.</p></div>
+            <div class="finding"><span class="sev" style="color: var(--sev-high)">High</span><strong>Silent session expiry</strong><p>When token refresh failed, the UI looked normal until the next click failed. Fix: a session-expired banner with a clear "Sign in again" action.</p></div>
+            <div class="finding"><span class="sev" style="color: var(--sev-high)">High</span><strong>Forms failing quietly</strong><p>Users got no feedback on a failed submit and could send it twice. Fix: inline errors and a disabled button while submitting.</p></div>
+            <div class="finding"><span class="sev" style="color: var(--sev-medium)">Medium</span><strong>One error breaks the whole page</strong><p>A single widget crash took down unrelated content. Fix: an error boundary around each widget region.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-meta">
+          <p class="label">Daily practice</p>
+          <h3>Spec-first delivery with AI tools</h3>
+          <div class="stack"><span class="side-tag side-ai">AI</span></div>
+          <div class="stack"><span class="chip">Claude</span><span class="chip">GitHub Copilot</span><span class="chip">Spec Kit</span></div>
+        </div>
+        <div class="case-body">
+          <p>I use AI agents to move faster without losing control of the result. Work starts from a written specification, so the reasoning is reviewable before any code exists, and every change still goes through code review and quality gates.</p>
+          <ol class="flow side-ai">
+            <li><strong>Specify</strong><span>Requirements and edge cases in writing</span></li>
+            <li><strong>Plan</strong><span>Technical approach checked against the codebase</span></li>
+            <li><strong>Break down</strong><span>Small, reviewable tasks</span></li>
+            <li><strong>Build</strong><span>Agent-assisted implementation</span></li>
+            <li><strong>Verify</strong><span>Review, SonarCloud gates, QA</span></li>
+          </ol>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="approach">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">How I work</p>
+        <h2>What teams can count on me for</h2>
+      </div>
+      <div class="principles">
+        <div class="principle"><h3>Build once, configure many times</h3><p>I design components around what editors and customers will change, so one feature can serve many organizations without forks.</p><span class="proof">7 shared product features</span></div>
+        <div class="principle"><h3>Plan for failure states</h3><p>Loading, empty, error and expired-session states are part of the feature, not an afterthought.</p><span class="proof">15-finding reliability audit</span></div>
+        <div class="principle"><h3>Write it down first</h3><p>Specs before code keep scope clear, make reviews faster, and give AI tools the right context.</p><span class="proof">Spec Kit in daily delivery</span></div>
+        <div class="principle"><h3>Share what I learn</h3><p>I run internal sessions on new frontend practices and help junior developers through code review.</p><span class="proof">React 19 and WebSockets talks</span></div>
+        <div class="principle"><h3>Ask why before how</h3><p>I start from the customer problem, then pick the smallest feature that solves it for every customer, not just one.</p><span class="proof">Presales and product releases</span></div>
+        <div class="principle"><h3>Use AI with judgment</h3><p>AI drafts, sweeps and suggests. I decide, verify and own the result.</p><span class="proof">Agent-assisted audit, human-checked</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="blog">
+    <div class="wrap">
+      <div class="section-head split">
+        <div>
+          <p class="label">Blog</p>
+          <h2>Notes on building products with AI</h2>
+          <p>What I learn about AI-assisted development, product thinking and frontend craft, written up as I go.</p>
+        </div>
+        <button class="btn primary" type="button" id="new-post" hidden>New post</button>
+      </div>
+      <div id="post-index">
+        <div class="empty-blog" id="blog-empty">
+          <h3>First post coming soon</h3>
+          <p>Posts on AI-assisted development, product engineering and frontend reliability will appear here.</p>
+        </div>
+        <ul class="post-list" id="post-list" hidden></ul>
+      </div>
+      <p class="status" id="blog-status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Experience</p>
+        <h2>Seven years of shipping software</h2>
+      </div>
+      <div class="timeline">
+        <div class="role"><span class="when">Oct 2024 – now</span><div><h3>Senior Frontend Developer</h3><span class="where">ITWorx · Cairo</span><p>Core features for a multi-customer digital workplace SaaS. Reliability audit, code reviews, mentoring and presales support.</p></div></div>
+        <div class="role"><span class="when">May 2023 – Oct 2024</span><div><h3>Frontend → Senior Frontend Developer</h3><span class="where">The Address Holding · Cairo</span><p>Reusable components and features in React, Next.js, TypeScript and Tailwind. Promoted to senior in June 2024.</p></div></div>
+        <div class="role"><span class="when">Feb 2020 – May 2023</span><div><h3>Web Developer (remote)</h3><span class="where">Agylz · Florida, USA</span><p>Websites and web apps with React, Redux, GraphQL and Formik, working directly with clients.</p></div></div>
+        <div class="role"><span class="when">Jul 2019 – Feb 2020</span><div><h3>Intern → Junior Frontend Developer</h3><span class="where">Cloudx9 · Cairo</span></div></div>
+        <div class="role"><span class="when">2014 – 2019</span><div><h3>B.Eng. Computer and Control Engineering</h3><span class="where">Port Said University</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talks">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Talks and community</p>
+        <h2>Sharing what I learn</h2>
+      </div>
+      <div class="talks">
+        <div class="talk"><span class="label">Talk · Mar 2025</span><h3>React 19 New Features Overview</h3><p>Co-presented. React Compiler, the <code>use</code> hook, client and server directives, Actions and <code>useOptimistic</code>.</p></div>
+        <div class="talk"><span class="label">Session · Oct 2024</span><h3>Node.js and WebSockets</h3><p>Internal knowledge-sharing session on real-time communication.</p></div>
+        <div class="talk"><span class="label">Hackathon · Nov 2026</span><h3>ITWorx AI Hackathon</h3><p>Company-wide hackathon on applied AI. Team member.</p></div>
+        <div class="talk"><span class="label">Workshop · Jun – Jul 2026</span><h3>AIWorx Workshop, Frontend track</h3><p>Three sessions on applying AI to frontend engineering.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="label">Contact</p>
+      <h2>Need an engineer who can build it, work with AI, and talk to customers?</h2>
+      <div class="contact-rows">
+        <div class="contact-row"><span class="label">Email</span><span class="val" id="email">mennaibraheem2@gmail.com</span><button class="btn small" type="button" id="copy-email">Copy</button></div>
+        <div class="contact-row"><span class="label">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/mennatullah-ibraheem-468323134/" target="_blank" rel="noopener">linkedin.com/in/mennatullah-ibraheem-468323134</a></div>
+        <div class="contact-row"><span class="label">GitHub</span><a class="val" href="https://github.com/MennaTallah2" target="_blank" rel="noopener">github.com/MennaTallah2</a></div>
+      </div>
+      <p class="status" id="copy-status" aria-live="polite"></p>
+    </div>
+  </section>
+ </div>
+
+ <article class="article" id="article-view" hidden>
+   <div class="wrap">
+     <div class="article-inner">
+       <a class="back" href="#blog">← All posts</a>
+       <p class="label" id="a-meta"></p>
+       <h1 id="a-title"></h1>
+       <p class="summary" id="a-summary"></p>
+       <div class="stack" id="a-tags"></div>
+       <div class="article-tools" id="a-tools" hidden><button class="btn small" type="button" id="edit-post">Edit post</button></div>
+       <div class="prose" id="a-body"></div>
+       <a class="back" href="#blog">← All posts</a>
+     </div>
+   </div>
+ </article>
+</main>
+
+<footer><div class="wrap">Mennatullah Ibraheem · Software Engineer: Frontend, AI, Product · Cairo, Egypt</div></footer>
+
+<dialog class="editor" id="editor" aria-labelledby="editor-title">
+  <form id="editor-form" novalidate>
+    <div class="editor-head">
+      <h2 id="editor-title">New post</h2>
+      <button class="btn small" type="button" id="editor-close">Close</button>
+    </div>
+    <div class="field">
+      <label for="f-title">Title</label>
+      <input id="f-title" type="text" required maxlength="160" placeholder="What I learned auditing our frontend's error handling">
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="f-date">Date</label><input id="f-date" type="date" required></div>
+      <div class="field"><label for="f-tags">Tags</label><input id="f-tags" type="text" placeholder="react, reliability, ai"><span class="hint">Separate tags with commas.</span></div>
+    </div>
+    <div class="field">
+      <label for="f-summary">Summary</label>
+      <textarea id="f-summary" rows="2" maxlength="300" placeholder="One or two sentences shown in the post list."></textarea>
+    </div>
+    <div class="field">
+      <div class="editor-head">
+        <label for="f-body">Post</label>
+        <div class="tabs"><button type="button" id="tab-write" aria-pressed="true">Write</button><button type="button" id="tab-preview" aria-pressed="false">Preview</button></div>
+      </div>
+      <textarea id="f-body" rows="16" placeholder="Write here. Arabic and English both work."></textarea>
+      <div class="preview-pane prose" id="f-preview" hidden></div>
+      <span class="hint">Formatting: ## heading, ### subheading, - list, 1. list, &gt; quote, **bold**, *italic*, `code`, ``` code block ```, [link text](https://example.com)</span>
+    </div>
+    <div class="editor-actions">
+      <button class="btn small danger" type="button" id="delete-post" hidden>Delete post</button>
+      <p class="status" id="editor-status" aria-live="polite"></p>
+      <div class="right">
+        <button class="btn" type="button" id="editor-cancel">Cancel</button>
+        <button class="btn primary" type="submit" id="editor-save">Publish post</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+  var DRAFT_KEY = "portfolio-post-draft";
+  var posts = [];
+  var canWrite = false;
+  var artifactNs = null;
+  var editingId = null;
+  var deleteArmed = false;
+
+  function $(id) { return document.getElementById(id); }
+  function safeGet(key) { try { return window.localStorage.getItem(key); } catch (e) { return null; } }
+  function safeSet(key, val) { try { window.localStorage.setItem(key, val); } catch (e) {} }
+  function safeDel(key) { try { window.localStorage.removeItem(key); } catch (e) {} }
+
+  /* ---------- helpers ---------- */
+  var dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+  function fmtDate(iso) {
+    var d = new Date(iso + "T00:00:00Z");
+    return isNaN(d) ? iso : dateFmt.format(d);
+  }
+  function readingTime(text) {
+    var words = (text || "").trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 200)) + " min read";
+  }
+  function slugify(title) {
+    var s = (title || "").toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
+    return s;
+  }
+  function uniqueSlug(title, exceptId) {
+    var base = slugify(title) || ("post-" + Date.now().toString(36));
+    var slug = base, n = 2;
+    while (posts.some(function (p) { return p.slug === slug && p.id !== exceptId; })) { slug = base + "-" + n++; }
+    return slug;
+  }
+  function todayISO() {
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function sorted() {
+    return posts.slice().sort(function (a, b) { return (b.date || "").localeCompare(a.date || "") || (b.createdAt || 0) - (a.createdAt || 0); });
+  }
+  function hasArabic(s) { return /[؀-ۿ]/.test(s || ""); }
+  function setDir(el, text) { if (hasArabic(text)) { el.dir = "rtl"; } else { el.removeAttribute("dir"); } }
+
+  /* ---------- light markdown renderer (DOM only, no innerHTML) ---------- */
+  function renderInline(parent, text) {
+    var re = /(`[^`]+`)|(\*\*[^*]+\*\*)|(\*[^*\s][^*]*\*)|(\[[^\]]+\]\((https?:\/\/[^\s)]+)\))/g;
+    var last = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var tok = m[0], el;
+      if (m[1]) { el = document.createElement("code"); el.textContent = tok.slice(1, -1); }
+      else if (m[2]) { el = document.createElement("strong"); el.textContent = tok.slice(2, -2); }
+      else if (m[3]) { el = document.createElement("em"); el.textContent = tok.slice(1, -1); }
+      else {
+        el = document.createElement("a");
+        el.textContent = tok.slice(1, tok.indexOf("]("));
+        el.href = m[5]; el.target = "_blank"; el.rel = "noopener";
+      }
+      parent.appendChild(el);
+      last = m.index + tok.length;
+    }
+    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+  }
+  function renderMarkdown(container, src) {
+    container.textContent = "";
+    var lines = (src || "").replace(/\r\n/g, "\n").split("\n");
+    var i = 0;
+    function block(tag, text) {
+      var el = document.createElement(tag); renderInline(el, text); setDir(el, text); container.appendChild(el); return el;
+    }
+    while (i < lines.length) {
+      var line = lines[i];
+      if (/^```/.test(line)) {
+        var code = []; i++;
+        while (i < lines.length && !/^```/.test(lines[i])) { code.push(lines[i]); i++; }
+        i++;
+        var pre = document.createElement("pre"), c = document.createElement("code");
+        c.textContent = code.join("\n"); pre.appendChild(c); pre.dir = "ltr"; container.appendChild(pre);
+        continue;
+      }
+      if (/^\s*$/.test(line)) { i++; continue; }
+      var h = /^(#{2,3})\s+(.*)$/.exec(line);
+      if (h) { block(h[1].length === 2 ? "h2" : "h3", h[2]); i++; continue; }
+      if (/^>\s?/.test(line)) {
+        var q = [];
+        while (i < lines.length && /^>\s?/.test(lines[i])) { q.push(lines[i].replace(/^>\s?/, "")); i++; }
+        block("blockquote", q.join(" "));
+        continue;
+      }
+      if (/^\s*[-*]\s+/.test(line) || /^\s*\d+\.\s+/.test(line)) {
+        var ordered = /^\s*\d+\.\s+/.test(line);
+        var list = document.createElement(ordered ? "ol" : "ul");
+        var itemRe = ordered ? /^\s*\d+\.\s+/ : /^\s*[-*]\s+/;
+        var allText = "";
+        while (i < lines.length && itemRe.test(lines[i])) {
+          var t = lines[i].replace(itemRe, ""); allText += t;
+          var li = document.createElement("li"); renderInline(li, t); list.appendChild(li); i++;
+        }
+        setDir(list, allText); container.appendChild(list);
+        continue;
+      }
+      var para = [];
+      while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^(```|#{2,3}\s|>|\s*[-*]\s+|\s*\d+\.\s+)/.test(lines[i])) { para.push(lines[i]); i++; }
+      if (para.length) block("p", para.join(" ")); else i++;
+    }
+  }
+
+  /* ---------- rendering ---------- */
+  function renderIndex() {
+    var list = $("post-list"), empty = $("blog-empty");
+    var items = sorted();
+    list.textContent = "";
+    empty.hidden = items.length > 0;
+    list.hidden = items.length === 0;
+    if (canWrite && !items.length) {
+      empty.querySelector("h3").textContent = "No posts yet";
+      empty.querySelector("p").textContent = "Use New post to write your first one. Visitors will see a short \"coming soon\" note until then.";
+    }
+    items.forEach(function (p) {
+      var li = document.createElement("li"); li.className = "post-item";
+      var a = document.createElement("a"); a.className = "post-link"; a.href = "#post-" + p.slug;
+      var when = document.createElement("span"); when.className = "when"; when.textContent = fmtDate(p.date);
+      var text = document.createElement("div"); text.className = "text";
+      var h = document.createElement("h3"); h.textContent = p.title; setDir(h, p.title);
+      text.appendChild(h);
+      if (p.summary) { var s = document.createElement("p"); s.textContent = p.summary; setDir(s, p.summary); text.appendChild(s); }
+      var meta = document.createElement("div"); meta.className = "stack";
+      var rt = document.createElement("span"); rt.className = "chip"; rt.textContent = readingTime(p.body); meta.appendChild(rt);
+      (p.tags || []).forEach(function (t) { var c = document.createElement("span"); c.className = "chip"; c.textContent = "#" + t; meta.appendChild(c); });
+      text.appendChild(meta);
+      a.appendChild(when); a.appendChild(text); li.appendChild(a); list.appendChild(li);
+    });
+
+    var latest = $("latest-post");
+    latest.textContent = "";
+    if (items.length) {
+      var la = document.createElement("a"); la.href = "#post-" + items[0].slug; la.className = "latest-title";
+      la.textContent = items[0].title; setDir(la, items[0].title);
+      var lm = document.createElement("span"); lm.className = "latest-meta"; lm.textContent = fmtDate(items[0].date) + " · " + readingTime(items[0].body);
+      latest.appendChild(la); latest.appendChild(lm);
+    } else {
+      var none = document.createElement("span"); none.className = "latest-meta"; none.textContent = "First post coming soon.";
+      latest.appendChild(none);
+    }
+  }
+
+  function showArticle(post) {
+    $("home-view").hidden = true;
+    $("article-view").hidden = false;
+    $("a-meta").textContent = fmtDate(post.date) + " · " + readingTime(post.body);
+    $("a-title").textContent = post.title; setDir($("a-title"), post.title);
+    $("a-summary").textContent = post.summary || ""; $("a-summary").hidden = !post.summary; setDir($("a-summary"), post.summary);
+    var tags = $("a-tags"); tags.textContent = "";
+    (post.tags || []).forEach(function (t) { var c = document.createElement("span"); c.className = "chip"; c.textContent = "#" + t; tags.appendChild(c); });
+    renderMarkdown($("a-body"), post.body);
+    $("a-tools").hidden = !canWrite;
+    $("edit-post").dataset.id = post.id;
+    document.title = post.title + " · Mennatullah Ibraheem";
+    window.scrollTo(0, 0);
+  }
+  function showHome(targetId) {
+    var wasArticle = !$("article-view").hidden;
+    $("article-view").hidden = true;
+    $("home-view").hidden = false;
+    document.title = "Mennatullah Ibraheem";
+    if (wasArticle && targetId) {
+      var el = document.getElementById(targetId);
+      if (el) el.scrollIntoView();
+    }
+  }
+  function route() {
+    var h = (location.hash || "").slice(1);
+    if (h.indexOf("post-") === 0) {
+      var slug = h.slice(5);
+      var post = posts.filter(function (p) { return p.slug === slug; })[0];
+      if (post) { showArticle(post); return; }
+    }
+    showHome(h);
+  }
+  window.addEventListener("hashchange", route);
+
+  /* ---------- loading ---------- */
+  fetch("posts.json", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+    .then(function (data) { posts = Array.isArray(data) ? data : []; })
+    .catch(function () { posts = []; })
+    .then(function () { renderIndex(); route(); });
+
+  /* ---------- owner tools ---------- */
+  function useCap(name) {
+    try { return window.claude && window.claude.use ? window.claude.use(name) : Promise.resolve(null); }
+    catch (e) { return Promise.resolve(null); }
+  }
+  Promise.all([useCap("artifact"), useCap("user")]).then(function (res) {
+    artifactNs = res[0];
+    var user = res[1];
+    if (!artifactNs || !user) return;
+    return user.can("files.write").then(function (ok) {
+      return ok === null ? user.canEdit() : ok;
+    }).then(function (ok) {
+      canWrite = !!ok;
+      if (!canWrite) return;
+      $("new-post").hidden = false;
+      renderIndex();
+      route();
+      var pending = null;
+      try { pending = window.sessionStorage.getItem("portfolio-reopen-draft"); window.sessionStorage.removeItem("portfolio-reopen-draft"); } catch (e) {}
+      if (pending) openEditor(null);
+    });
+  }).catch(function () {});
+
+  var dlg = $("editor");
+  function fields() {
+    return {
+      title: $("f-title").value.trim(),
+      date: $("f-date").value || todayISO(),
+      tags: $("f-tags").value.split(",").map(function (t) { return t.trim().toLowerCase().replace(/^#/, ""); }).filter(Boolean),
+      summary: $("f-summary").value.trim(),
+      body: $("f-body").value
+    };
+  }
+  function fill(p) {
+    $("f-title").value = p.title || "";
+    $("f-date").value = p.date || todayISO();
+    $("f-tags").value = (p.tags || []).join(", ");
+    $("f-summary").value = p.summary || "";
+    $("f-body").value = p.body || "";
+  }
+  function setTab(preview) {
+    $("tab-write").setAttribute("aria-pressed", preview ? "false" : "true");
+    $("tab-preview").setAttribute("aria-pressed", preview ? "true" : "false");
+    $("f-body").hidden = preview;
+    $("f-preview").hidden = !preview;
+    if (preview) renderMarkdown($("f-preview"), $("f-body").value || "Nothing to preview yet.");
+  }
+  function openEditor(id) {
+    editingId = id;
+    deleteArmed = false;
+    $("delete-post").textContent = "Delete post";
+    $("editor-status").textContent = "";
+    var post = id ? posts.filter(function (p) { return p.id === id; })[0] : null;
+    if (post) {
+      fill(post);
+      $("editor-title").textContent = "Edit post";
+      $("editor-save").textContent = "Save changes";
+      $("delete-post").hidden = false;
+    } else {
+      var draft = null;
+      try { draft = JSON.parse(safeGet(DRAFT_KEY) || "null"); } catch (e) { draft = null; }
+      fill(draft || { date: todayISO() });
+      $("editor-title").textContent = "New post";
+      $("editor-save").textContent = "Publish post";
+      $("delete-post").hidden = true;
+      if (draft) $("editor-status").textContent = "Restored your unsaved draft.";
+    }
+    setTab(false);
+    if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+    $("f-title").focus();
+  }
+  function closeEditor() { if (dlg.open) dlg.close(); }
+
+  $("new-post").addEventListener("click", function () { openEditor(null); });
+  $("edit-post").addEventListener("click", function () { openEditor(this.dataset.id); });
+  $("editor-close").addEventListener("click", closeEditor);
+  $("editor-cancel").addEventListener("click", closeEditor);
+  $("tab-write").addEventListener("click", function () { setTab(false); });
+  $("tab-preview").addEventListener("click", function () { setTab(true); });
+  ["f-title", "f-date", "f-tags", "f-summary", "f-body"].forEach(function (id) {
+    $(id).addEventListener("input", function () { if (!editingId) safeSet(DRAFT_KEY, JSON.stringify(fields())); });
+  });
+
+  function errorText(err) {
+    var code = err && err.code;
+    if (code === "not_writer" || code === "not_granted" || code === "consent_required" || code === "capability_disabled" || code === "capability_removed" || code === "not_declared")
+      return "Saving isn't available in this view. Open the page from your Claude gallery to publish, or ask Claude to add the post for you. Your draft is kept in this browser.";
+    if (code === "rate_limited") return "Too many saves in a short time. Wait a minute, then try again.";
+    if (code === "too_large") return "This post is too large to save. Shorten it or split it into two posts.";
+    if (code === "conflict") return "The page was updated somewhere else. It will reload with the latest version; your draft is kept.";
+    return "The post didn't save because of a connection problem. Try again.";
+  }
+  function save(next, doneMsg) {
+    if (!artifactNs) return Promise.reject({ code: "not_granted" });
+    if (!editingId) { try { window.sessionStorage.setItem("portfolio-reopen-draft", "1"); } catch (e) {} }
+    return artifactNs.publish({ "posts.json": { content: JSON.stringify(next, null, 2) + "\n", contentType: "application/json" } })
+      .then(function () {
+        try { window.sessionStorage.removeItem("portfolio-reopen-draft"); } catch (e) {}
+        posts = next;
+        renderIndex();
+        $("blog-status").textContent = doneMsg;
+      });
+  }
+
+  $("editor-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = fields();
+    if (!f.title) { $("editor-status").textContent = "Add a title before publishing."; $("f-title").focus(); return; }
+    if (!f.body.trim()) { $("editor-status").textContent = "Write the post before publishing."; setTab(false); $("f-body").focus(); return; }
+    var next, slug, msg;
+    if (editingId) {
+      next = posts.map(function (p) {
+        if (p.id !== editingId) return p;
+        slug = p.slug;
+        return { id: p.id, slug: p.slug, title: f.title, date: f.date, tags: f.tags, summary: f.summary, body: f.body, createdAt: p.createdAt, updatedAt: Date.now() };
+      });
+      msg = "Post updated.";
+    } else {
+      slug = uniqueSlug(f.title, null);
+      next = posts.concat([{ id: "p" + Date.now().toString(36), slug: slug, title: f.title, date: f.date, tags: f.tags, summary: f.summary, body: f.body, createdAt: Date.now() }]);
+      msg = "Post published.";
+    }
+    var btn = $("editor-save");
+    btn.disabled = true; $("editor-status").textContent = "Saving…";
+    save(next, msg).then(function () {
+      if (!editingId) safeDel(DRAFT_KEY);
+      closeEditor();
+      if (location.hash === "#post-" + slug) route(); else location.hash = "post-" + slug;
+    }).catch(function (err) {
+      $("editor-status").textContent = errorText(err);
+    }).then(function () { btn.disabled = false; });
+  });
+
+  $("delete-post").addEventListener("click", function () {
+    if (!deleteArmed) { deleteArmed = true; this.textContent = "Click again to delete"; return; }
+    var id = editingId, btn = this;
+    btn.disabled = true; $("editor-status").textContent = "Deleting…";
+    save(posts.filter(function (p) { return p.id !== id; }), "Post deleted.").then(function () {
+      closeEditor(); location.hash = "blog";
+    }).catch(function (err) {
+      $("editor-status").textContent = errorText(err);
+    }).then(function () { btn.disabled = false; deleteArmed = false; btn.textContent = "Delete post"; });
+  });
+
+  /* ---------- copy email ---------- */
+  var status = $("copy-status");
+  $("copy-email").addEventListener("click", function () {
+    var email = $("email");
+    function selectIt() {
+      var r = document.createRange(); r.selectNodeContents(email);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      status.textContent = "Email selected. Press Ctrl+C or Cmd+C to copy.";
+    }
+    try {
+      navigator.clipboard.writeText(email.textContent).then(function () { status.textContent = "Email copied."; }, selectIt);
+    } catch (err) { selectIt(); }
+  });
+})();
+</script>
+</body>
+</html>
