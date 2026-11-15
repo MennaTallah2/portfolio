@@ -14,6 +14,8 @@ img { max-width: 100%; }
 [hidden] { display: none !important; }
 </style>
 <title>Mennatullah Ibraheem</title>
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b8500e'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' fill='%23fbf5ec' text-anchor='middle'%3EMI%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -178,6 +180,12 @@ section.block { padding-block: 56px; border-top: 1px solid var(--line); }
 .principle { display: grid; gap: 8px; align-content: start; }
 .principle h3 { font-size: 1.1rem; font-weight: 700; }
 .principle p { color: var(--muted); font-size: 0.95rem; }
+.strengths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.strength { display: flex; flex-direction: column; gap: 8px; padding: 20px; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 14px; }
+.strength h3 { font-size: 1.05rem; font-weight: 700; }
+.strength p { color: var(--muted); font-size: 0.93rem; }
+.growth-note { margin: 20px 0 0; padding: 14px 18px; border-radius: 12px; background: var(--accent-soft); color: var(--fg); font-size: 0.95rem; max-width: 75ch; }
+.principles-label { margin: 48px 0 20px; }
 .principle .proof { font-family: var(--font-body); font-size: 0.76rem; color: var(--accent); }
 
 /* Blog index */
@@ -268,11 +276,12 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
   .sides { grid-template-columns: 1fr; }
   .side + .side { border-left: none; }
   .principles { grid-template-columns: 1fr 1fr; }
+  .strengths { grid-template-columns: 1fr; }
   .flow { grid-template-columns: 1fr; }
   .flow li { border-top: none; border-left: 2px solid var(--side, var(--accent)); padding: 8px 0 8px 14px; }
 }
 @media (max-width: 600px) {
-  .principles, .findings, .talks { grid-template-columns: 1fr; }
+  .principles, .strengths, .findings, .talks { grid-template-columns: 1fr; }
   .role, .post-link { grid-template-columns: 1fr; gap: 4px; }
   .section-head.split, .field-row { grid-template-columns: 1fr; }
   .glance .row { grid-template-columns: 1fr; gap: 4px; }
@@ -304,7 +313,7 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
       <div class="hero-copy">
         <p class="label">Software Engineer · Frontend · AI · Product · Cairo</p>
         <h1>I build <em class="side-fe">the interface</em>, <em class="side-ai">the AI behind it</em>, and <em class="side-pm">the reason a customer needs it</em>.</h1>
-        <p class="lede">7+ years shipping web products with React and Next.js. Today I build core features of a multi-customer SaaS platform, work with AI agents to plan, build and audit code, and support presales so I know what customers actually need.</p>
+        <p class="lede">7+ years shipping web products with React and Next.js. Today I build core features of a multi-customer SaaS product, designed so every customer can configure them, and work with AI agents to plan, build and audit code.</p>
         <div class="ctas">
           <a class="btn primary" href="#sides">What I do</a>
           <a class="btn" href="#blog">Read the blog</a>
@@ -318,7 +327,7 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
         <dl>
           <div class="row"><dt>Now</dt><dd>Senior Frontend Developer at ITWorx</dd></div>
           <div class="row"><dt>Sides</dt><dd><div class="stack"><span class="side-tag side-fe">Frontend engineer</span><span class="side-tag side-ai">AI builder</span><span class="side-tag side-pm">Product-minded</span></div></dd></div>
-          <div class="row"><dt>Stack</dt><dd><div class="stack"><span class="chip">React 19</span><span class="chip">Next.js 16</span><span class="chip">TypeScript</span><span class="chip">Claude</span><span class="chip">LangChain</span><span class="chip">Umbraco</span></div></dd></div>
+          <div class="row"><dt>Stack</dt><dd><div class="stack"><span class="chip">React 19</span><span class="chip">Next.js 16</span><span class="chip">TypeScript</span><span class="chip">Claude</span><span class="chip">Umbraco</span></div></dd></div>
           <div class="row"><dt>Languages</dt><dd>Arabic and English</dd></div>
           <div class="row"><dt>Latest post</dt><dd id="latest-post"><span class="latest-meta">First post coming soon.</span></dd></div>
         </dl>
@@ -331,7 +340,7 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
       <div class="section-head">
         <p class="label">What I do</p>
         <h2>One engineer, three sides</h2>
-        <p>Software work today needs people who can move between the code, the AI tools and the customer. These are the three sides I bring, and the work that backs each one.</p>
+        <p>Software work today needs people who can move between the code, the AI tools and the product. These are the three sides I bring, and the work that backs each one.</p>
       </div>
       <div class="sides">
         <div class="side side-fe">
@@ -358,14 +367,14 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
         </div>
         <div class="side side-pm">
           <span class="side-tag side-pm">Product-minded</span>
-          <h3>Building what customers need</h3>
+          <h3>Building the product, not one-off projects</h3>
           <p class="tagline">From a customer's ask to a product feature.</p>
           <ul>
-            <li>Technical input and demos for presales</li>
             <li>Turning one customer's request into a feature every customer can configure</li>
-            <li>Release testing and sign-off with QA</li>
+            <li>Designing for the content editors who set features up, not only end users</li>
+            <li>Release testing and sign-off with QA on versioned product releases</li>
           </ul>
-          <p class="proof-line">Presales support · product releases 4.x and R2.8</p>
+          <p class="proof-line">7 shared product features · releases 4.x and R2.8</p>
         </div>
       </div>
     </div>
@@ -456,13 +465,21 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
       <div class="section-head">
         <p class="label">How I work</p>
         <h2>What teams can count on me for</h2>
+        <p>Calm, collaborative and thorough. I listen first, then turn what I hear into something the whole team can build and ship.</p>
       </div>
+      <div class="strengths">
+        <article class="strength"><h3>I build agreement, not arguments</h3><p>I make sure every side is heard, then help the team settle on an approach everyone can commit to.</p></article>
+        <article class="strength"><h3>I try new tools early</h3><p>Given a problem and some room, I explore better ways to solve it. That's how I brought AI agents into my daily delivery before they were everywhere.</p></article>
+        <article class="strength"><h3>I finish the unglamorous parts</h3><p>Error states, edge cases, release sign-off. I stay with the work until it's done properly, not just until it demos well.</p></article>
+      </div>
+      <p class="growth-note"><strong>Something I'm working on:</strong> I care a lot about getting things right, so I can keep polishing longer than I need to. Writing things down and asking for reviews early helps me know when it's ready to share.</p>
+      <p class="label principles-label">Working principles</p>
       <div class="principles">
         <div class="principle"><h3>Build once, configure many times</h3><p>I design components around what editors and customers will change, so one feature can serve many organizations without forks.</p><span class="proof">7 shared product features</span></div>
         <div class="principle"><h3>Plan for failure states</h3><p>Loading, empty, error and expired-session states are part of the feature, not an afterthought.</p><span class="proof">15-finding reliability audit</span></div>
         <div class="principle"><h3>Write it down first</h3><p>Specs before code keep scope clear, make reviews faster, and give AI tools the right context.</p><span class="proof">Spec Kit in daily delivery</span></div>
         <div class="principle"><h3>Share what I learn</h3><p>I run internal sessions on new frontend practices and help junior developers through code review.</p><span class="proof">React 19 and WebSockets talks</span></div>
-        <div class="principle"><h3>Ask why before how</h3><p>I start from the customer problem, then pick the smallest feature that solves it for every customer, not just one.</p><span class="proof">Presales and product releases</span></div>
+        <div class="principle"><h3>Ask why before how</h3><p>I start from the customer problem, then pick the smallest feature that solves it for every customer, not just one.</p><span class="proof">Product releases 4.x and R2.8</span></div>
         <div class="principle"><h3>Use AI with judgment</h3><p>AI drafts, sweeps and suggests. I decide, verify and own the result.</p><span class="proof">Agent-assisted audit, human-checked</span></div>
       </div>
     </div>
@@ -496,7 +513,7 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
         <h2>Seven years of shipping software</h2>
       </div>
       <div class="timeline">
-        <div class="role"><span class="when">Oct 2024 – now</span><div><h3>Senior Frontend Developer</h3><span class="where">ITWorx · Cairo</span><p>Core features for a multi-customer digital workplace SaaS. Reliability audit, code reviews, mentoring and presales support.</p></div></div>
+        <div class="role"><span class="when">Oct 2024 – now</span><div><h3>Senior Frontend Developer</h3><span class="where">ITWorx · Cairo</span><p>Core features for a multi-customer digital workplace SaaS. Reliability audit, code reviews and mentoring.</p></div></div>
         <div class="role"><span class="when">May 2023 – Oct 2024</span><div><h3>Frontend → Senior Frontend Developer</h3><span class="where">The Address Holding · Cairo</span><p>Reusable components and features in React, Next.js, TypeScript and Tailwind. Promoted to senior in June 2024.</p></div></div>
         <div class="role"><span class="when">Feb 2020 – May 2023</span><div><h3>Web Developer (remote)</h3><span class="where">Agylz · Florida, USA</span><p>Websites and web apps with React, Redux, GraphQL and Formik, working directly with clients.</p></div></div>
         <div class="role"><span class="when">Jul 2019 – Feb 2020</span><div><h3>Intern → Junior Frontend Developer</h3><span class="where">Cloudx9 · Cairo</span></div></div>
@@ -509,7 +526,7 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
     <div class="wrap">
       <div class="section-head">
         <p class="label">Talks and community</p>
-        <h2>Sharing what I learn</h2>
+        <h2>Talks, workshops and events</h2>
       </div>
       <div class="talks">
         <div class="talk"><span class="label">Talk · Mar 2025</span><h3>React 19 New Features Overview</h3><p>Co-presented. React Compiler, the <code>use</code> hook, client and server directives, Actions and <code>useOptimistic</code>.</p></div>
@@ -523,7 +540,7 @@ dialog.editor::backdrop { background: rgba(43, 33, 26, 0.45); }
   <section class="contact" id="contact">
     <div class="wrap">
       <p class="label">Contact</p>
-      <h2>Need an engineer who can build it, work with AI, and talk to customers?</h2>
+      <h2>Need an engineer who can build it, work with AI, and think in products?</h2>
       <div class="contact-rows">
         <div class="contact-row"><span class="label">Email</span><span class="val" id="email">mennaibraheem2@gmail.com</span><button class="btn small" type="button" id="copy-email">Copy</button></div>
         <div class="contact-row"><span class="label">LinkedIn</span><a class="val" href="https://www.linkedin.com/in/mennatullah-ibraheem-468323134/" target="_blank" rel="noopener">linkedin.com/in/mennatullah-ibraheem-468323134</a></div>
